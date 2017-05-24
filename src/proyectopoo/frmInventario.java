@@ -26,13 +26,12 @@ public class frmInventario extends javax.swing.JFrame {
     public frmInventario() throws SQLException, ClassNotFoundException {
         initComponents();
         
-        Conexion cnn = new Conexion();
+        
         try{
-          
-        String consulta = "select * from mobiliario_inventario";
-        proyectopoo.Conexion.sentencia = proyectopoo.Conexion.conexion.createStatement();
-        ResultSet rs = proyectopoo.Conexion.sentencia.executeQuery(consulta);
-        rs.next();
+            Conexion cnn = new Conexion();
+            String consulta = "select * from mobiliario_inventario";
+            ResultSet rs = proyectopoo.Conexion.sentencia.executeQuery(consulta);
+            rs.next();
             DefaultTableModel modelo = (DefaultTableModel) tblInvent.getModel();
             while(rs.next()){
                 Object[] fila = new Object[3];
@@ -44,6 +43,8 @@ public class frmInventario extends javax.swing.JFrame {
             tblInvent.setModel(modelo);
         }catch(SQLException ex){
             
+        } catch (Exception ex) {
+            Logger.getLogger(frmInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -7,6 +7,8 @@ package proyectopoo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -27,10 +29,10 @@ public class frmPaquete extends javax.swing.JFrame {
    public frmPaquete() throws ClassNotFoundException, SQLException {
         initComponents();
         
-        Conexion cnn = new Conexion();
+        
         try{
+            Conexion cnn = new Conexion();
             String consulta = "select * from paquetes";
-            proyectopoo.Conexion.sentencia = proyectopoo.Conexion.conexion.createStatement();
             ResultSet rs = proyectopoo.Conexion.sentencia.executeQuery(consulta);
             rs.next();
             DefaultTableModel modelo = (DefaultTableModel) tblPaquete.getModel();
@@ -44,7 +46,9 @@ public class frmPaquete extends javax.swing.JFrame {
             tblPaquete.setModel(modelo);
         }catch(SQLException ex){
             
-        }
+        } catch (Exception ex) {
+           Logger.getLogger(frmPaquete.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
 
     /**

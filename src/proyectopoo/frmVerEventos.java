@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -26,8 +28,9 @@ public class frmVerEventos extends javax.swing.JFrame {
     public frmVerEventos() throws SQLException, ClassNotFoundException {
         initComponents();
         
-        Conexion cnn = new Conexion();
+        
         try{
+            Conexion cnn = new Conexion();
             String consulta = "select * from evento";
             ResultSet rs = proyectopoo.Conexion.sentencia.executeQuery(consulta);
             rs.next();
@@ -42,6 +45,8 @@ public class frmVerEventos extends javax.swing.JFrame {
             tblEventos.setModel(modelo);
         }catch(SQLException ex){
             
+        } catch (Exception ex) {
+            Logger.getLogger(frmVerEventos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

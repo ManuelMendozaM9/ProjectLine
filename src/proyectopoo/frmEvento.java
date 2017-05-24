@@ -411,9 +411,8 @@ public class frmEvento extends javax.swing.JFrame {
     int area_id, ambientacion_id, entretenimiento_id;
     double costo_area, costo_ambi, costo_entreten;
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-            Conexion cnn = new Conexion();
-
         try {
+            Conexion cnn = new Conexion();
             String evento = cmbEventos.getSelectedItem().toString();
             String dia = cmbDia.getSelectedItem().toString();
             String mes = String.valueOf(cmbMes.getSelectedIndex());
@@ -428,10 +427,11 @@ public class frmEvento extends javax.swing.JFrame {
                     +", " + ambientacion_id + ""        
                     +", " + area_id + ""        
                     +", '" + costo_total + "')" ;
-            Conexion.sentencia = Conexion.conexion.createStatement();
             Conexion.sentencia.executeUpdate(query);
 
         } catch (SQLException ex) {
+            Logger.getLogger(frmEvento.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(frmEvento.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -532,11 +532,10 @@ public class frmEvento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechaActionPerformed
-        Conexion con = new Conexion();
         try {
+            Conexion con = new Conexion();
             String mes = String.valueOf(cmbMes.getSelectedIndex());
             String consultas = "select `Evento_fecha` from `evento` where `Evento_fecha` = '"+cmbAño.getSelectedItem()+"-"+mes+"-"+cmbDia.getSelectedItem()+"'";
-            proyectopoo.Conexion.sentencia = proyectopoo.Conexion.conexion.createStatement();
             ResultSet rss = proyectopoo.Conexion.sentencia.executeQuery(consultas);
             if(rss.next()){
                 JOptionPane.showMessageDialog(rootPane, "Esta fecha esta apartada");
@@ -545,6 +544,8 @@ public class frmEvento extends javax.swing.JFrame {
             }
         }catch(SQLException ex){
             
+        } catch (Exception ex) {
+            Logger.getLogger(frmEvento.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }//GEN-LAST:event_btnFechaActionPerformed
 
