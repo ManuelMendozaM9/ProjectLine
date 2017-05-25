@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import proyectopoo.Conexion;
 
 /**
  *
@@ -47,7 +48,6 @@ public class frmEvento extends javax.swing.JFrame {
         btnArea = new javax.swing.JButton();
         btnAmbi = new javax.swing.JButton();
         btnEntreten = new javax.swing.JButton();
-        btnPaquetes = new javax.swing.JButton();
         cmbEventos = new javax.swing.JComboBox();
         btnGuardar = new javax.swing.JButton();
         cmbDia = new javax.swing.JComboBox<String>();
@@ -57,11 +57,9 @@ public class frmEvento extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         cmbArea = new javax.swing.JComboBox();
         cmbMusica = new javax.swing.JComboBox();
         cmbIlumina = new javax.swing.JComboBox();
-        cmbPaquete = new javax.swing.JComboBox();
         cmbAnimador = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
         btnCancel = new javax.swing.JButton();
@@ -76,6 +74,8 @@ public class frmEvento extends javax.swing.JFrame {
         cmbTipoA = new javax.swing.JComboBox();
         btnSalir = new javax.swing.JButton();
         btnFecha = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        txtCosto = new javax.swing.JLabel();
 
         jLabel7.setText("Tipo:");
 
@@ -112,13 +112,6 @@ public class frmEvento extends javax.swing.JFrame {
             }
         });
 
-        btnPaquetes.setText("Ver Paquetes");
-        btnPaquetes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPaquetesActionPerformed(evt);
-            }
-        });
-
         cmbEventos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione:", "Graduación", "XV Años", "Boda", "Bautizo", "Despedida de Soltera(o)", "Fiesta Infantil" }));
 
         btnGuardar.setText("Guardar");
@@ -152,8 +145,6 @@ public class frmEvento extends javax.swing.JFrame {
 
         jLabel5.setText("Ambientación:");
 
-        jLabel6.setText("Paquetes:");
-
         cmbArea.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione:", "Interior", "Exterior", "Mixto" }));
         cmbArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,8 +166,6 @@ public class frmEvento extends javax.swing.JFrame {
             }
         });
 
-        cmbPaquete.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione:", "Paquete 1", "Paquete 2", "Paquete 3", "Paquete 4", "Paquete 5" }));
-
         cmbAnimador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Animador:", "Locutor", "Dj", "Payaso", "Strippers" }));
         cmbAnimador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,6 +183,12 @@ public class frmEvento extends javax.swing.JFrame {
         });
 
         jLabel9.setText("Personas que asistiran:");
+
+        txtNumP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumPActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Mobiliario:");
 
@@ -224,6 +219,15 @@ public class frmEvento extends javax.swing.JFrame {
             }
         });
 
+        jLabel13.setText("Costo Total:");
+
+        txtCosto.setText("$ 0");
+        txtCosto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtCostoMouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -234,20 +238,14 @@ public class frmEvento extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cmbPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(cmbMusica, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cmbTipoA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmbMusica, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbTipoA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(cmbIlumina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,10 +270,8 @@ public class frmEvento extends javax.swing.JFrame {
                                 .addComponent(cmbBocinas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnEntreten)
-                                .addComponent(btnAmbi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnPaquetes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnEntreten)
+                            .addComponent(btnAmbi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -303,16 +299,18 @@ public class frmEvento extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18)
                         .addComponent(txtNumP, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addComponent(btnCancel)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSalir)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
-                .addComponent(btnCancel)
-                .addGap(18, 18, 18)
-                .addComponent(btnSalir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,16 +358,16 @@ public class frmEvento extends javax.swing.JFrame {
                     .addComponent(btnAmbi)
                     .addComponent(cmbTipoA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(cmbPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPaquetes))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnCancel)
-                    .addComponent(btnSalir))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnGuardar)
+                        .addComponent(btnCancel)
+                        .addComponent(btnSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
 
         pack();
@@ -395,60 +393,66 @@ public class frmEvento extends javax.swing.JFrame {
         frm.setTitle("Entretenimiento");
         frm.setVisible(true);
     }//GEN-LAST:event_btnEntretenActionPerformed
-
-    private void btnPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaquetesActionPerformed
-        try {
-            frmPaquete frm = new frmPaquete();
-            frm.setLocationRelativeTo(frm);
-            frm.setTitle("Paquetes Disponibles");
-            frm.setVisible(true);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(frmEvento.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(frmEvento.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnPaquetesActionPerformed
-    int area_id, ambientacion_id, entretenimiento_id;
+    int area_id, ambientacion_id, entretenimiento_id, personas, banderaS, banderaI, banderaL, banderaP;
     double costo_area, costo_ambi, costo_entreten;
+    String evento, dia, mes, año;
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
             Conexion cnn = new Conexion();
-            String evento = cmbEventos.getSelectedItem().toString();
-            String dia = cmbDia.getSelectedItem().toString();
-            String mes = String.valueOf(cmbMes.getSelectedIndex());
-            String año = cmbAño.getSelectedItem().toString();
-            int personas = Integer.parseInt(txtNumP.getText());
+            evento = cmbEventos.getSelectedItem().toString();
+            dia = cmbDia.getSelectedItem().toString();
+            mes = String.valueOf(cmbMes.getSelectedIndex());
+            año = cmbAño.getSelectedItem().toString();
+            personas = Integer.parseInt(txtNumP.getText());
+            banderaP = 0;
+            if(personas < 100){
+                JOptionPane.showMessageDialog(rootPane, "Tiene que tener minimo 100 personas asistentes");
+                banderaP = 1;
+            }else if(personas > 1000){
+                JOptionPane.showMessageDialog(rootPane, "Tiene que tener maximo 1000 personas asistentes");
+                banderaP = 1;
+            }
             AsignarID();
+            ValidarCamposString(evento, dia, mes, año);
+            ValidarCamposInt(area_id, ambientacion_id, entretenimiento_id, personas);
             double costo_total=costo_area+costo_ambi+costo_entreten;
-            String query = "insert into evento(Evento_nom,Evento_fecha,numPersonas,idEntreten,idAmbi,idArea,costoTotal) values('" + evento + "'"
+            if(banderaS == 0 && banderaI == 0 && banderaP == 0){
+                String query = "insert into evento(Evento_nom,Evento_fecha,numPersonas,idEntreten,idAmbi,idArea,costoTotal) values('" + evento + "'"
                     +", '" + año + "-" + mes + "-" + dia + "'"
                     +", '" + personas + "'"
                     +", " + entretenimiento_id + ""
                     +", " + ambientacion_id + ""        
                     +", " + area_id + ""        
                     +", '" + costo_total + "')" ;
-            Conexion.sentencia.executeUpdate(query);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(frmEvento.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(frmEvento.class.getName()).log(Level.SEVERE, null, ex);
+                Conexion.sentencia = cnn.conexion.createStatement();
+                Conexion.sentencia.executeUpdate(query);
+            
+                JOptionPane.showMessageDialog(rootPane, "Registro exitoso");
+                banderaL = 1;
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Llene los campos correctamente");
+                banderaL = 0;
+            }    
+            } catch (SQLException ex) {
+                Logger.getLogger(frmEvento.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(frmEvento.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        if(banderaL == 1){
+            cmbAño.setSelectedItem("Año:");
+            cmbMes.setSelectedItem("Mes:");
+            cmbDia.setSelectedItem("Dia:");
+            cmbEventos.setSelectedItem("Seleccione:");
+            cmbIlumina.setSelectedItem("Ilimunación:");
+            cmbAnimador.setSelectedItem("Animador:");
+            cmbMusica.setSelectedItem("Musica:");
+            cmbTipoA.setSelectedItem("Seleccione:");
+            cmbArea.setSelectedItem("Seleccione:");
+            txtMesas.setText("");
+            txtSillas.setText("");
+            cmbBocinas.setSelectedItem("Bocinas:");
+            txtNumP.setText("");
         }
-        
-        cmbAño.setSelectedItem("Año:");
-        cmbMes.setSelectedItem("Mes:");
-        cmbDia.setSelectedItem("Dia:");
-        cmbEventos.setSelectedItem("Seleccione:");
-        cmbIlumina.setSelectedItem("Ilimunación:");
-        cmbAnimador.setSelectedItem("Animador:");
-        cmbMusica.setSelectedItem("Musica:");
-        cmbPaquete.setSelectedItem("Seleccione:");
-        cmbTipoA.setSelectedItem("Seleccione:");
-        cmbArea.setSelectedItem("Seleccione:");
-        txtMesas.setText("");
-        txtSillas.setText("");
-        cmbBocinas.setSelectedItem("Bocinas:");
-        txtNumP.setText("");
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
@@ -475,7 +479,6 @@ public class frmEvento extends javax.swing.JFrame {
         cmbIlumina.setSelectedItem("Ilimunación:");
         cmbAnimador.setSelectedItem("Animador:");
         cmbMusica.setSelectedItem("Musica:");
-        cmbPaquete.setSelectedItem("Seleccione:");
         cmbTipoA.setSelectedItem("Seleccione:");
         cmbArea.setSelectedItem("Seleccione:");
         txtMesas.setText("");
@@ -485,11 +488,8 @@ public class frmEvento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
     int area;
     private void cmbAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAreaActionPerformed
-        area = cmbArea.getSelectedIndex();
-        if(area ==0){
-            JOptionPane.showMessageDialog(this, "Seleccione un area por favor");
-        }
-        area = cmbArea.getSelectedIndex();
+        area = cmbArea.getSelectedIndex(); {
+        
         switch(area){
             case 1: 
                 area_id = 1;
@@ -505,6 +505,7 @@ public class frmEvento extends javax.swing.JFrame {
                 area_id = 3;
                 costo_area = 6500;
             break;
+            }
         }
     }//GEN-LAST:event_cmbAreaActionPerformed
     int musica, animador;
@@ -535,8 +536,9 @@ public class frmEvento extends javax.swing.JFrame {
         try {
             Conexion con = new Conexion();
             String mes = String.valueOf(cmbMes.getSelectedIndex());
-            String consultas = "select `Evento_fecha` from `evento` where `Evento_fecha` = '"+cmbAño.getSelectedItem()+"-"+mes+"-"+cmbDia.getSelectedItem()+"'";
-            ResultSet rss = proyectopoo.Conexion.sentencia.executeQuery(consultas);
+            String consultas = "select Evento_fecha from evento where `Evento_fecha` = '"+cmbAño.getSelectedItem()+"-"+mes+"-"+cmbDia.getSelectedItem()+"'";
+            Conexion.sentencia = con.conexion.createStatement();
+            ResultSet rss = Conexion.sentencia.executeQuery(consultas);
             if(rss.next()){
                 JOptionPane.showMessageDialog(rootPane, "Esta fecha esta apartada");
             }else{
@@ -553,6 +555,50 @@ public class frmEvento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbDiaActionPerformed
 
+    private void txtNumPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumPActionPerformed
+
+    }//GEN-LAST:event_txtNumPActionPerformed
+
+    private void txtCostoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCostoMouseEntered
+        area = cmbArea.getSelectedIndex(); {
+        switch(area){
+            case 1: 
+                area_id = 1;
+                costo_area = 3000;
+            break;
+            
+            case 2:
+                area_id = 2;
+                costo_area = 4000;
+            break;
+                
+            case 3:
+                area_id = 3;
+                costo_area = 6500;
+            break;
+            }
+        }
+        AsignarID();
+        double costo_total=costo_area+costo_ambi+costo_entreten;
+        txtCosto.setText("$ "+ costo_total);
+    }//GEN-LAST:event_txtCostoMouseEntered
+    
+    public int ValidarCamposString(String evento, String dia, String mes, String año){
+        banderaS = 0;
+        if(evento == "Seleccione:" || dia == "Seleccione:" || mes == "Seleccione:" || año == "Seleccione:"){
+            banderaS = 1;
+        }
+        return banderaS;
+    }
+        
+    public int ValidarCamposInt(int area_id, int ambientacion_id, int entretenimiento_id, int personas){
+        banderaI = 0;
+        if(area_id == 0 || ambientacion_id == 0 || entretenimiento_id == 0 || personas == 0){
+            banderaI = 1;
+        }
+        return banderaI;
+    }
+    
     private void AsignarID(){
         switch(musica){
             case 1:
@@ -666,7 +712,6 @@ public class frmEvento extends javax.swing.JFrame {
     private javax.swing.JButton btnEntreten;
     private javax.swing.JButton btnFecha;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnPaquetes;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox cmbAnimador;
     private javax.swing.JComboBox cmbArea;
@@ -677,20 +722,20 @@ public class frmEvento extends javax.swing.JFrame {
     private javax.swing.JComboBox cmbIlumina;
     private javax.swing.JComboBox<String> cmbMes;
     private javax.swing.JComboBox cmbMusica;
-    private javax.swing.JComboBox cmbPaquete;
     private javax.swing.JComboBox cmbTipoA;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel txtCosto;
     private javax.swing.JTextField txtMesas;
     private javax.swing.JTextField txtNumP;
     private javax.swing.JTextField txtSillas;

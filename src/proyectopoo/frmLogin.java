@@ -103,6 +103,7 @@ public class frmLogin extends javax.swing.JFrame {
         password = txtContra.getText();
         frmEventoUsu frm  = new frmEventoUsu();
         frmEvento pral = new frmEvento();
+        this.setTitle("Login");
         frm.setTitle("Menu Principal");
         pral.setTitle("Menu Principal");
         if(usuario.equals("usuario") && password.equals("eventos")) {

@@ -9,7 +9,7 @@ public class Conexion {
     protected Connection conexion;
     //JDBC Driver y base de datos URL
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private final String DB_URL = "jdbc:mysql://localhost:3306/evento";
+    private final String DB_URL = "jdbc:mysql://localhost:3306/eventos?useSSL=false";
     
     //Credenciales de la base de datos
     private final String USER = "root";

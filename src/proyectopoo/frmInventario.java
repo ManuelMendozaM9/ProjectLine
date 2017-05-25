@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,8 +31,8 @@ public class frmInventario extends javax.swing.JFrame {
         try{
             Conexion cnn = new Conexion();
             String consulta = "select * from mobiliario_inventario";
-            ResultSet rs = proyectopoo.Conexion.sentencia.executeQuery(consulta);
-            rs.next();
+            Conexion.sentencia = cnn.conexion.createStatement();
+            ResultSet rs = Conexion.sentencia.executeQuery(consulta);
             DefaultTableModel modelo = (DefaultTableModel) tblInvent.getModel();
             while(rs.next()){
                 Object[] fila = new Object[3];
@@ -57,17 +58,19 @@ public class frmInventario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        try {
-            frmVerEventos1 = new proyectopoo.frmVerEventos();
-        } catch (java.sql.SQLException e1) {
-            e1.printStackTrace();
-        } catch (java.lang.ClassNotFoundException e2) {
-            e2.printStackTrace();
-        }
         btnCancelar = new javax.swing.JButton();
         btnEventosVer = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblInvent = new javax.swing.JTable();
+        btnModificaMesas = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtMesas = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtSillas = new javax.swing.JTextField();
+        txtBocinas = new javax.swing.JTextField();
+        btnModificaSillas = new javax.swing.JButton();
+        btnModificaBocinas = new javax.swing.JButton();
 
         btnCancelar.setText("Cerrar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +79,7 @@ public class frmInventario extends javax.swing.JFrame {
             }
         });
 
-        btnEventosVer.setText("Eventos");
+        btnEventosVer.setText("Ver Eventos");
         btnEventosVer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEventosVerActionPerformed(evt);
@@ -93,6 +96,51 @@ public class frmInventario extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblInvent);
 
+        btnModificaMesas.setText("Agregar Mesas");
+        btnModificaMesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificaMesasActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Mesas");
+
+        txtMesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMesasActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Sillas");
+
+        jLabel3.setText("Bocinas");
+
+        txtSillas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSillasActionPerformed(evt);
+            }
+        });
+
+        txtBocinas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBocinasActionPerformed(evt);
+            }
+        });
+
+        btnModificaSillas.setText("Agregar Sillas");
+        btnModificaSillas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificaSillasActionPerformed(evt);
+            }
+        });
+
+        btnModificaBocinas.setText("Agregar Bocinas");
+        btnModificaBocinas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificaBocinasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,25 +148,55 @@ public class frmInventario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnEventosVer)
-                    .addComponent(btnCancelar))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(txtMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSillas, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtBocinas, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnModificaBocinas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnModificaMesas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnModificaSillas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEventosVer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(14, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(btnEventosVer)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(btnEventosVer))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtMesas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificaMesas))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSillas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificaSillas))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtBocinas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificaBocinas)
+                            .addComponent(btnCancelar))))
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -140,6 +218,59 @@ public class frmInventario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEventosVerActionPerformed
 
+    private void btnModificaMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaMesasActionPerformed
+        mesas = Integer.parseInt(txtMesas.getText());
+        try {
+            Conexion cnn = new Conexion();
+            String consulta = "update mobiliario_inventario set cantidad = " + mesas + " where nombre = 'Mesas'";
+            Conexion.sentencia = cnn.conexion.createStatement();
+            Conexion.sentencia.executeUpdate(consulta);
+        } catch (Exception ex) {
+            Logger.getLogger(frmInventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(rootPane, "Inventario actualizado");
+    }//GEN-LAST:event_btnModificaMesasActionPerformed
+    int mesas, sillas, bocinas;
+    private void txtMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMesasActionPerformed
+       mesas = Integer.parseInt(txtMesas.getText());
+    }//GEN-LAST:event_txtMesasActionPerformed
+
+    private void txtSillasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSillasActionPerformed
+        sillas = Integer.parseInt(txtSillas.getText());
+    }//GEN-LAST:event_txtSillasActionPerformed
+
+    private void txtBocinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBocinasActionPerformed
+        bocinas = Integer.parseInt(txtBocinas.getText());
+    }//GEN-LAST:event_txtBocinasActionPerformed
+
+    private void btnModificaSillasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaSillasActionPerformed
+        sillas = Integer.parseInt(txtSillas.getText());
+        try {
+            Conexion cnn = new Conexion();
+            String consulta = "UPDATE mobiliario_inventario SET cantidad = " + sillas
+                              + " WHERE nombre = 'Sillas'";
+            Conexion.sentencia = cnn.conexion.createStatement();
+            Conexion.sentencia.executeUpdate(consulta);
+        } catch (Exception ex) {
+            Logger.getLogger(frmInventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(rootPane, "Inventario actualizado");
+    }//GEN-LAST:event_btnModificaSillasActionPerformed
+
+    private void btnModificaBocinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaBocinasActionPerformed
+        bocinas = Integer.parseInt(txtBocinas.getText());
+        try {
+            Conexion cnn = new Conexion();
+            String consulta = "UPDATE `mobiliario_inventario` SET `cantidad` = " + bocinas
+                              + " WHERE nombre = 'Bocinas'";
+            Conexion.sentencia = cnn.conexion.createStatement();
+            Conexion.sentencia.executeUpdate(consulta);
+        } catch (Exception ex) {
+            Logger.getLogger(frmInventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(rootPane, "Inventario actualizado");
+    }//GEN-LAST:event_btnModificaBocinasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -148,9 +279,17 @@ public class frmInventario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JToggleButton btnEventosVer;
-    private proyectopoo.frmVerEventos frmVerEventos1;
+    private javax.swing.JButton btnModificaBocinas;
+    private javax.swing.JToggleButton btnModificaMesas;
+    private javax.swing.JButton btnModificaSillas;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblInvent;
+    private javax.swing.JTextField txtBocinas;
+    private javax.swing.JTextField txtMesas;
+    private javax.swing.JTextField txtSillas;
     // End of variables declaration//GEN-END:variables
 
     private void frmsetTitle(String registro) {

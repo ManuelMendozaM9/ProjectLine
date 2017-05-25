@@ -33,7 +33,8 @@ public class frmPaquete extends javax.swing.JFrame {
         try{
             Conexion cnn = new Conexion();
             String consulta = "select * from paquetes";
-            ResultSet rs = proyectopoo.Conexion.sentencia.executeQuery(consulta);
+            Conexion.sentencia = cnn.conexion.createStatement();
+            ResultSet rs = Conexion.sentencia.executeQuery(consulta);
             rs.next();
             DefaultTableModel modelo = (DefaultTableModel) tblPaquete.getModel();
             while(rs.next()){
